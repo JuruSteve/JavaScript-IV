@@ -17,6 +17,13 @@ class Instructor extends Person {
     this.specialty = instructorOptions.specialty;
     this.favLanguage = instructorOptions.favLanguage;
     this.catchPhrase = instructorOptions.catchPhrase;
+    this.correctGrades = function(studentOptions) {
+      let grade = studentOptions.grade;
+      let min = 95;
+      let max = 100;
+      grade = Math.floor(Math.random() * (max - min) + min);
+      return grade >= 95 && grade;
+    };
   }
   demo(subject) {
     return `Today we are learning about ${subject}`;
@@ -32,6 +39,7 @@ class Student extends Person {
     this.previousBackground = studentOptions.previousBackground;
     this.className = studentOptions.className;
     this.favSubjects = studentOptions.favSubjects;
+    this.grade = studentOptions.grade;
   }
   listOfSubjects() {
     return this.favSubjects.map(item => {
@@ -43,6 +51,14 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  graduate() {
+    if (this.grade > 70) {
+      return `${this.name} is set to graduate with a grade of ${this.grade}`;
+    } else {
+      console.log(instructor1.correctGrades(this));
+      return `${this.name}'s work was graded again. His score is ${this.grade}`;
+    }
   }
 }
 
@@ -71,7 +87,10 @@ const student1 = new Student({
   name: "student1",
   previousBackground: "Part-time web developer",
   className: "Web18",
-  favSubjects: ["CSS", "JavaScript", "Node"]
+  favSubjects: ["CSS", "JavaScript", "Node"],
+  grade: (function(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  })(1, 100)
 });
 
 const projectManager1 = new ProjectManager({
@@ -90,3 +109,11 @@ console.log(
 console.log(student1.sprintChallenge('JavaScript IV - "this" keyword'));
 console.log(projectManager1.standup("#pm-group-chat"));
 console.log(projectManager1.debugsCode(student1, "Prototypal inheritance"));
+
+// Stretch
+console.log(instructor1.correctGrades(student1));
+console.log(projectManager1.correctGrades(student1));
+console.log(student1.graduate());
+console.log(instructor1.correctGrades(student1));
+console.log(projectManager1.correctGrades(student1));
+console.log(student1.graduate());
