@@ -17,14 +17,14 @@ class Instructor extends Person {
     this.specialty = instructorOptions.specialty;
     this.favLanguage = instructorOptions.favLanguage;
     this.catchPhrase = instructorOptions.catchPhrase;
-    this.correctGrades = function(studentOptions) {
-      let grade = studentOptions.grade;
-      let min = 95;
-      let max = 100;
-      grade = Math.floor(Math.random() * (max - min) + min);
-      return grade >= 95 && grade;
-    };
   }
+  correctGrades = function(studentOptions) {
+    let grade = studentOptions.grade;
+    let min = 95;
+    let max = 100;
+    grade = Math.floor(Math.random() * (max - min) + min);
+    return grade >= 95 && grade;
+  };
   demo(subject) {
     return `Today we are learning about ${subject}`;
   }
